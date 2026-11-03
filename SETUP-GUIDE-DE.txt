@@ -1,0 +1,48 @@
+NovaOS 0.3.0-vmtest – Schnellstart
+===================================
+
+1. VM VORBEREITEN
+-----------------
+Erstelle eine neue VM vom Typ Linux / Arch Linux (64-bit) oder Other Linux (64-bit).
+Empfehlung: 4 GB RAM, 2 CPU-Kerne, 40 GB neue virtuelle Festplatte, 128 MB Grafikspeicher.
+Hänge NovaOS-0.3.0-vmtest-x86_64.iso als virtuelles DVD-Laufwerk ein.
+
+2. LIVE-SYSTEM STARTEN
+---------------------
+Starte die VM von der ISO. Nach dem Boot sollte sich die KDE-Plasma-Sitzung automatisch als Benutzer nova öffnen.
+Verbinde das Live-System über das Netzwerksymbol mit dem Internet.
+Teste Dolphin, Konsole, Firefox und die Systemeinstellungen.
+
+3. INSTALLATION STARTEN
+-----------------------
+Doppelklicke auf „NovaOS installieren“. Das Installationsprofil stellt Deutsch, Zeitzone Europe/Berlin, KDE-Pakete, Wine, PipeWire und Netzwerkdienste voraus.
+Du musst weiterhin das richtige virtuelle Ziellaufwerk, die Partitionierung, Benutzername und Passwort wählen.
+
+ACHTUNG: Wenn du ein reales Laufwerk auswählst und die Partitionierung bestätigst, können alle darauf befindlichen Daten gelöscht werden. Für den ersten Versuch ausschließlich die neue virtuelle Festplatte verwenden.
+
+4. INSTALLATION IN ARCHINSTALL
+------------------------------
+- Ziellaufwerk: die neue virtuelle Festplatte wählen.
+- Partitionierung: für eine leere VM die automatische Standardpartitionierung nutzen.
+- Bootloader: GRUB ist im Profil vorausgewählt.
+- Benutzer: eigenen Benutzernamen und ein sicheres Passwort festlegen; sudo-Rechte aktivieren.
+- Prüfen, dass der Kernel „linux“ und die NovaOS-Pakete in der Zusammenfassung vorhanden sind.
+- Installation bestätigen und warten, bis archinstall fertig ist.
+- Neustarten und die ISO aus dem virtuellen Laufwerk entfernen.
+
+5. ERSTER START
+---------------
+Melde dich mit dem während der Installation erstellten Benutzer an. SDDM und NetworkManager sind durch das NovaOS-Profil aktiviert. Wine startet eine Windows-Anwendung nach Rechtsklick > Öffnen mit > Windows-Programm mit Wine starten. Bei zugeordneten .exe-Dateien sollte der NovaOS-Handler angeboten werden.
+
+Wine ist keine Sicherheits-Sandbox. Starte nur EXE-Dateien aus vertrauenswürdigen Quellen. Wine-Programme können auf Dateien deines Benutzerkontos zugreifen.
+
+6. ERSTE TESTS
+--------------
+- Funktioniert der KDE-Desktop nach dem Neustart?
+- Funktioniert Netzwerk über NetworkManager?
+- Kommt Audio über PipeWire?
+- Öffnet sich Firefox?
+- Funktioniert Wine mit einer kleinen, bekannten Testanwendung?
+- Funktioniert Herunterfahren und erneutes Starten?
+
+Bitte notiere VM-Software, Firmwaremodus (BIOS/UEFI), RAM, Grafikmodus und Fehlermeldungen.

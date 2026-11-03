@@ -1,0 +1,16 @@
+NovaOS 0.3.0-vmtest – Buildstatus
+================================
+
+Enthalten: Archiso-Profilaufbau, KDE-Live-System, Live-Benutzer-Service,
+Wine/Winetricks, multilib-Konfiguration, vorausgefülltes Archinstall-Profil,
+Installations- und VM-Testanleitung, GitHub-Actions-Buildworkflow.
+
+In dieser Arbeitsumgebung NICHT gebaut/getestet:
+- Kein mkarchiso/pacman vorhanden (Host ist Debian 13).
+- DNS-Auflösung zum Arch-Paketserver schlägt fehl; Arch-Pakete können hier
+  nicht heruntergeladen werden.
+- Daher wurde kein ISO-Abbild erzeugt und kein QEMU-Boottest ausgeführt.
+
+Vor einem VM-Test muss der GitHub-Workflow oder ein Build auf einem aktuellen
+Arch-Linux-Rechner das ISO erzeugen. Erst danach kann das Ergebnis als
+bootfähiges ISO und Installationsmedium bestätigt werden.

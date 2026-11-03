@@ -1,0 +1,33 @@
+NovaOS 1.0 Full Desktop RC3 — Build-/Teststatus
+==================================================
+
+Projektumfang:
+- KDE Plasma Desktop, Windows-ähnlicher Workflow
+- Brave Browser als Standardbrowser (brave-bin, AUR-Build)
+- Apache OpenOffice 4.1.17 Deutsch; Writer, Calc, Impress, Draw, Math, Base
+- Dolphin mit Archiv-, Netzwerk-, Bild- und Video-Vorschauen
+- Ark/7-Zip, Kate, KCalc, Spectacle, Gwenview, Okular, KolourPaint, KClock, Filelight
+- Thunderbird, VLC, KDE-Systemeinstellungen, Infozentrum, Systemmonitor, Partitionmanager, Kamera und Webcam (Kamera/Kamoso)
+- Wine, Winetricks, Wine Mono/Gecko und ausgewählte 32-Bit-Laufzeitbibliotheken
+- Hardware-Erkennung über Kernel/udev, linux-firmware, hwinfo, lshw, inxi,
+  lspci/lsusb, fwupd, KDE Infozentrum und Hardwarebericht beim Boot
+- Netzwerk, Audio, Bluetooth, USB, NTFS/exFAT/Btrfs, Drucken und Scannen
+- Geführter UEFI-Installer (systemd-boot/ext4); Zielmedium wird nach doppelter Warnung gelöscht
+- Lokale Brave-/OpenOffice-Paketarchive samt SHA-256-Manifest werden ins ISO gelegt
+  und während der Zielinstallation installiert
+
+Prüfungen:
+- Bash-Syntax der Shellskripte und PKGBUILD: geprüft
+- Python-Syntax des Installer-Preset-Generators: geprüft
+- Archinstall-JSON und eingebettetes Nachinstallations-Payload: geprüft
+- Paket-/MIME-Zuordnungen und SHA-256-Pinning: statisch geprüft
+
+Noch NICHT ausgeführt:
+- vollständiger mkarchiso-Build
+- Boot-Test der ISO
+- Installation auf einer VM und erster Neustart
+- Funktionsprüfung der Apps und Hardware auf echter VM-/PC-Hardware
+
+Die ISO wurde in dieser Umgebung nicht gebaut: Die Ausführungsumgebung ist Debian,
+`pacman` und `mkarchiso` fehlen, und die benötigten Arch/AUR/SourceForge-Paketquellen
+sind von hier nicht erreichbar. RC3 ist ein Quell-/Buildstand, keine fertige ISO.

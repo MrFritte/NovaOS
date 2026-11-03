@@ -1,0 +1,21 @@
+NovaOS 1.0 Full Desktop RC3
+===========================
+
+- Brave Browser als Standardbrowser, lokal aus brave-bin (AUR) gebaut.
+- Apache OpenOffice 4.1.17 Deutsch integriert; Writer, Calc, Impress, Draw, Math, Base.
+- LibreOffice/Frefox aus der Standard-Zielinstallation entfernt.
+- Dolphin, Ark/7-Zip, Kate, KCalc, Spectacle, Gwenview, Okular, KolourPaint,
+  Thunderbird, VLC, KDE Infozentrum und Systemmonitor als Standardanwendungen.
+- Wine, Winetricks, Wine Mono/Gecko und ausgewählte 32-Bit-Laufzeitbibliotheken.
+- Hardwarebericht automatisch beim Systemstart; zusätzlicher Menüpunkt Hardware-Erkennung.
+- WLAN/LAN, Bluetooth, Audio, USB, NTFS/exFAT/Btrfs, Drucken und Scannen.
+- Offline-Installationspakete für Brave und OpenOffice werden von der ISO ins Ziel kopiert.
+- Archiso-Workflow baut die ISO auf einem Arch-Linux-Container.
+
+Noch nicht getestet: tatsächlicher ISO-Build, Live-Boot, UEFI-Installation,
+Neustart von installierter VM, Brave/OpenOffice-Funktionstest, Hardwaretests.
+
+- Zusätzliche Alltagsprogramme: KClock, Filelight, Kamera/Kamoso, ffmpegthumbs und kdegraphics-thumbnailers.
+- Verbessert: OpenOffice-Dateitypen und Office-Standardzuordnungen.
+- Verbessert: VM-Testskript mit 8 GB RAM, 4 vCPU, 60-GB-Disk und KVM/TCG-Erkennung.
+- Statische Projektprüfung erfolgreich; ISO und VM-Installation bleiben ausdrücklich ungetestet.

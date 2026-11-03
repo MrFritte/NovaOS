@@ -1,0 +1,51 @@
+name: Build NovaOS 1.0 Full Desktop RC3 ISO
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+    paths:
+      - "**"
+      - ".github/workflows/build-iso.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: novaos-iso-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-iso:
+    name: Build bootable NovaOS 1.0 Full Desktop RC3 ISO
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Check out NovaOS source
+        uses: actions/checkout@v4
+
+      - name: Free runner disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android 2>/dev/null || true
+          df -h
+
+      - name: Build in an Arch Linux container
+        run: |
+          docker run --rm --privileged --security-opt seccomp=unconfined \
+            -v "$GITHUB_WORKSPACE:/workspace" -w /workspace archlinux:latest \
+            bash -euc '
+              pacman -Syu --noconfirm --needed archiso python sudo git base-devel binutils libarchive
+              chmod +x scripts/*.sh overlay/usr/local/bin/novaos-* overlay/usr/local/lib/novaos/*.sh
+              ./scripts/verify-project.sh
+              ./scripts/build-iso.sh
+            '
+
+      - name: Upload ISO and checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: NovaOS-1.0-FullDesktop-ISO
+          path: |
+            out/NovaOS-1.0-x86_64.iso
+            out/NovaOS-1.0-x86_64.iso.sha256
+          if-no-files-found: error
+          retention-days: 14

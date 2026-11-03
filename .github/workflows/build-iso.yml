@@ -21,8 +21,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
-      - name: Check out NovaOS source
+      - name: Check out NovaOS repository
         uses: actions/checkout@v4
+
+      - name: Extract NovaOS source archive
+        run: |
+          test -s NovaOS-1.0-FullDesktop-RC3-REPO-ROOT.zip
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          unzip -oq NovaOS-1.0-FullDesktop-RC3-REPO-ROOT.zip -d .
+          test -s scripts/build-iso.sh
+          test -s overlay/usr/local/bin/novaos-installer
+          test -s packages/novaos-live.x86_64
 
       - name: Free runner disk space
         run: |

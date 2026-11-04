@@ -12,7 +12,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: novaos-iso-\${{ github.ref }}
+  # Unique group per run: a hung older runner cannot block a new attempt.
+  group: novaos-iso-${{ github.run_id }}
   cancel-in-progress: true
 
 jobs:

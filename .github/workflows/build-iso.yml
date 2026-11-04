@@ -48,12 +48,8 @@ jobs:
           chmod +x scripts/*.sh overlay/usr/local/bin/novaos-* overlay/usr/local/lib/novaos/*.sh
           ./scripts/verify-project.sh
 
-      - name: Free runner disk space (bounded)
-        shell: bash
-        run: |
-          set +e
-          timeout 90s sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android 2>/dev/null
-          df -h
+      - name: Check runner disk space
+        run: df -h
 
       - name: Build in an Arch Linux container
         run: |

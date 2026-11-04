@@ -39,6 +39,7 @@ jobs:
           tar --zstd -xf "$RUNNER_TEMP/novaos-source.tar.zst" -C "$GITHUB_WORKSPACE"
           test -s apply-rc3-hotfix.py
           python3 apply-rc3-hotfix.py "$GITHUB_WORKSPACE"
+          python3 apply-rc3-hotfix2.py "$GITHUB_WORKSPACE"
           test -s scripts/build-iso.sh
           test -s scripts/verify-project.sh
           test -s overlay/usr/local/bin/novaos-installer

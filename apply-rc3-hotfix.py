@@ -92,8 +92,8 @@ patch(p,
       "local package delivery verification")
 
 p = "docs/BUILD-ISO-DE.md"
-patch(p,
-      "1. baut \`brave-bin\` aus dem Arch User Repository (AUR) als normaler Build-Benutzer;\n2. baut \`novaos-openoffice-bin\`",
-      "1. baut \`brave-bin\` aus dem Arch User Repository (AUR) als normaler Build-Benutzer;\n2. baut GTK2 als AUR-Kompatibilitätspaket, weil es für OpenOffice 4.1.17 benötigt wird, aber nicht mehr in den offiziellen Arch-Repos liegt;\n3. paketiert \`novaos-openoffice-bin\`",
-      "build documentation GTK2 step")
+tick = chr(96)
+old_docs = "1. baut " + tick + "brave-bin" + tick + " aus dem Arch User Repository (AUR) als normaler Build-Benutzer;\n2. baut " + tick + "novaos-openoffice-bin" + tick
+new_docs = "1. baut " + tick + "brave-bin" + tick + " aus dem Arch User Repository (AUR) als normaler Build-Benutzer;\n2. baut GTK2 als AUR-Kompatibilitätspaket, weil es für OpenOffice 4.1.17 benötigt wird, aber nicht mehr in den offiziellen Arch-Repos liegt;\n3. paketiert " + tick + "novaos-openoffice-bin" + tick
+patch(p, old_docs, new_docs, "build documentation GTK2 step")
 print("NovaOS RC3 GTK2/OpenOffice compatibility fix applied.")

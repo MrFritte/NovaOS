@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: novaos-iso-${{ github.ref }}
+  group: novaos-iso-\${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - name: Check out NovaOS repository
         uses: actions/checkout@v4
 
-      - name: Reassemble NovaOS source archive
+      - name: Reassemble and patch NovaOS source archive
         shell: bash
         run: |
           set -Eeuo pipefail
@@ -37,6 +37,8 @@ jobs:
           base64 --decode "$RUNNER_TEMP/novaos-source.tar.zst.b64" > "$RUNNER_TEMP/novaos-source.tar.zst"
           zstd --test "$RUNNER_TEMP/novaos-source.tar.zst"
           tar --zstd -xf "$RUNNER_TEMP/novaos-source.tar.zst" -C "$GITHUB_WORKSPACE"
+          test -s apply-rc3-hotfix.py
+          python3 apply-rc3-hotfix.py "$GITHUB_WORKSPACE"
           test -s scripts/build-iso.sh
           test -s scripts/verify-project.sh
           test -s overlay/usr/local/bin/novaos-installer

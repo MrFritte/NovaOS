@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Third NovaOS RC3 hotfix: omit an optional multilib audio package unavailable on the build mirror."""
+"""Third NovaOS RC3 hotfix: use the current package set and keep Wine's 32-bit audio codec."""
 from pathlib import Path
 import sys
 
@@ -9,19 +9,15 @@ files = [
     root / "packages/novaos-live.x86_64",
     root / "packages/novaos-installed.txt",
 ]
-removed = 0
 
+restored = 0
 for path in files:
     if not path.exists():
-        continue
+        raise SystemExit(f"required package manifest missing: {path}")
     lines = path.read_text(encoding="utf-8").splitlines()
-    kept = [line for line in lines if line.strip() != target]
-    removed += len(lines) - len(kept)
-    if len(kept) != len(lines):
-        path.write_text("\n".join(kept) + "\n", encoding="utf-8")
+    if target not in [line.strip() for line in lines]:
+        lines.append(target)
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        restored += 1
 
-if removed == 0:
-    raise SystemExit("optional multilib package not found in either NovaOS package manifest")
-
-print(f"Removed optional {target} from {removed} NovaOS package manifest entry/entries.")
-print("Wine remains enabled; the unavailable optional 32-bit MPEG audio codec is omitted.")
+print(f"Ensured {target} is present in both live and installed package manifests (restored {restored}).")

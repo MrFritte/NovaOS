@@ -57,7 +57,10 @@ jobs:
           docker run --rm --privileged --security-opt seccomp=unconfined \
             -v "$GITHUB_WORKSPACE:/workspace" -w /workspace archlinux:latest \
             bash -euc '
-              pacman -Syu --noconfirm --needed archiso python sudo git base-devel binutils libarchive
+              # Use one freshly synchronized Tier-1 mirror for every repository,
+              # including Multilib used by Wine in the archiso profile.
+              printf "%s\\n" "Server = https://frankfurt.mirror.pkgbuild.com/\\$repo/os/\\$arch" > /etc/pacman.d/mirrorlist
+              pacman -Syyu --noconfirm --needed archiso python sudo git base-devel binutils libarchive
               ./scripts/verify-project.sh
               ./scripts/build-iso.sh
             '

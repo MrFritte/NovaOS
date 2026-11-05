@@ -29,4 +29,4 @@ section = [line for line in section if not (
 lines[start + 1:end] = [mirror] + section
 conf.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-print(f"Configured Frankfurt Tier-1 mirror in [{multilib}] of {conf}")
+print(f"Configured Frankfurt Tier-1 mirror in [multilib] of {conf}")

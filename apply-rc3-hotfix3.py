@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Third NovaOS RC3 hotfix: use the current package set and keep Wine's 32-bit audio codec."""
+"""Third NovaOS RC3 hotfix: drop an unavailable optional 32-bit MPEG codec."""
 from pathlib import Path
 import sys
 
@@ -9,15 +9,15 @@ files = [
     root / "packages/novaos-live.x86_64",
     root / "packages/novaos-installed.txt",
 ]
-
-restored = 0
+removed = 0
 for path in files:
     if not path.exists():
         raise SystemExit(f"required package manifest missing: {path}")
     lines = path.read_text(encoding="utf-8").splitlines()
-    if target not in [line.strip() for line in lines]:
-        lines.append(target)
-        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-        restored += 1
+    kept = [line for line in lines if line.strip() != target]
+    removed += len(lines) - len(kept)
+    if len(kept) != len(lines):
+        path.write_text("\n".join(kept) + "\n", encoding="utf-8")
 
-print(f"Ensured {target} is present in both live and installed package manifests (restored {restored}).")
+print(f"Removed unavailable optional {target} from {removed} package manifest entries.")
+print("Wine, Winetricks and the other 32-bit runtime packages remain enabled.")
